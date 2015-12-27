@@ -1,0 +1,29 @@
+#This file is included in the general Makefile, the libs Makefile and the src Makefile
+
+CWD = $(shell readlink -f "$(dir $(lastword $(MAKEFILE_LIST)))")
+ROOT = $(CWD)
+LIB_DIR = $(ROOT)/lib
+SRC_DIR = ./src
+
+INCLUDE  = -I$(ROOT)/inc
+INCLUDE += -I$(LIB_DIR)
+INCLUDE += -I$(LIB_DIR)/inc
+INCLUDE += -I$(LIB_DIR)/inc/core
+INCLUDE += -I$(LIB_DIR)/inc/peripherals
+
+ToolChain = arm-none-eabi
+CC = $(ToolChain)-gcc
+LD = $(ToolChain)-ld
+AR = $(ToolChain)-ar
+AS = $(ToolChain)-as
+OBJCOPY = $(ToolChain)-objcopy
+
+ASFLAGS = -g
+LDFLAGS = -Tstm32f10x.ld -Llib
+
+#---Attention---#
+# The last macro is the density type of user chip
+CFLAGS  = -g -O0 -c -fno-common -mcpu=cortex-m3 -mthumb \
+		  -DUSE_STDPERIPH_DRIVER=1 \
+		  -DSTM32F10X_HD=1
+CFLAGS += $(INCLUDE)
