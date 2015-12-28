@@ -4,11 +4,11 @@ linux环境下的stm32f103vc工程模板
 # 目录说明
 工程模板的目录分为lib、inc、src。
 
-1.lib目录是对ST官方库V3.5.0的文件进行类似风格的分类，值得注意的是lib/src/startup使用的是官方库startup目录下的gcc_ride7里的文件。
+1.lib目录是对ST官方库V3.5.0的文件进行类似风格的分类，值得注意的是lib/src/startup使用的是官方库startup目录下的gcc_ride7里的文件。不需要用到的外设源文件可以删减/注释掉该目录下的Makefile中对应变量CSRCS的追加赋值项。
 
 2.inc目录存放用户自定义或需要修改的头文件。
 
-3.src存放用户编写的源代码文件。
+3.src存放用户编写的源代码文件。已经编写但不需要被编译进固件的源文件可以通过删减/注释该目录下的Makefile中对应变量SRCS的追加赋值项。
 
 #OpenOCD烧录
 根据需求修改flash.cfg文件内容（也可参考[官方文档](http://openocd.org/doc-release/pdf/openocd.pdf)），尤其注意CHIPNAME、interface配置、target配置和跟在命令```flash write_image```后的烧录固件名。
