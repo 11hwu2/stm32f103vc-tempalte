@@ -6,9 +6,6 @@ include ./Makefile.common
 
 FW_NAME=main
 
-USR_SRCS = $(wildcard $(SRC_DIR)/*.c)
-USR_OBJS = $(USR_SRCS:.c=.o)
-
 .PHONY: lib src firmware
 
 all: 	lib src firmware
@@ -18,6 +15,10 @@ lib:
 
 src:
 	$(MAKE) -C src
+
+# Get user object files from user source folder
+USR_SRCS = $(shell ls $(SRC_DIR)/*.o)
+USR_OBJS = $(USR_SRCS:.c=.o)
 
 firmware: $(FW_NAME).elf
 

@@ -3,11 +3,11 @@
 include ../Makefile.common
 
 #---Attention---#
-# find files in these folders
+# Find files in these folders
 vpath %.c ./
 
 #---Attention---#
-# put your *.c source files here
+# Put your *.c source files here
 SRCS  = main.c
 SRCS += stm32f10x_it.c
 
@@ -18,6 +18,7 @@ all:$(OBJS)
 $(OBJS):%.o:%.c
 	$(CC) $(CFLAGS) -o $@ $<
 
+#---Attention---#
+# Clean all the object files whether you need or not! Otherwise, the needless files will be compiled in object firmware! 
 clean:
-	rm -f $(OBJS)
 	rm -f *.o
